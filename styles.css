@@ -1,0 +1,204 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Permitimos scroll cuando sea necesario */
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    background-color: #f0e68c;
+    min-height: 100vh;
+    position: relative;
+}
+
+.container, .screen2, .screen3 {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    text-align: center;
+    flex-direction: column;
+    justify-content: flex-start; /* Cambiado para mejor scroll */
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+    /* Aseguramos que el contenido sea scrolleable */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.container.active, .screen2.active, .screen3.active {
+    display: flex;
+}
+
+.panda {
+    width: min(200px, 60vw);
+    height: auto;
+    margin: 10px 0;
+}
+
+h1 {
+    font-size: clamp(1.2rem, 5vw, 2rem);
+    margin: 10px;
+    padding: 0 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h2 {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    margin: 10px;
+    padding: 0 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.heart-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.heart-button img {
+    width: min(30px, 8vw);
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.heart-button:hover img {
+    transform: scale(1.1);
+}
+
+.alert {
+    display: none;
+    padding: 20px;
+    background-color: pink;
+    color: black;
+    margin: 20px auto;
+    border-radius: 5px;
+    width: min(80%, 300px);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    /* Permitimos scroll en el alert si es necesario */
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.alert input {
+    width: 90%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.alert button {
+    padding: 8px 20px;
+    margin-top: 10px;
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.image-container {
+    width: 90%;
+    height: auto;
+    max-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    /* Permitimos scroll si la imagen es muy grande */
+    overflow: auto;
+}
+
+.scaled-image {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.buttons {
+    position: sticky; /* Cambiado a sticky para mejor comportamiento con scroll */
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    z-index: 10;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background-color: rgba(240, 230, 140, 0.8); /* Fondo semi-transparente */
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 480px) {
+    .container, .screen2, .screen3 {
+        padding: 10px;
+        min-height: calc(100vh - 20px); /* Ajuste para el padding */
+    }
+
+    .image-container {
+        width: 95%;
+        height: auto;
+        max-height: 60vh;
+    }
+
+    .buttons {
+        padding: 10px;
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-height: 500px) {
+    body {
+        height: auto;
+    }
+
+    .container, .screen2, .screen3 {
+        min-height: 100%;
+        padding-top: 20px;
+        padding-bottom: 80px;
+    }
+
+    .image-container {
+        max-height: none; /* Permite que la imagen mantenga su aspecto */
+    }
+    
+    /* Aseguramos que los botones permanezcan visibles */
+    .buttons {
+        position: fixed;
+        bottom: 0;
+        background-color: rgba(240, 230, 140, 0.95);
+    }
+}
+
+/* Para asegurar que el scroll funcione en dispositivos muy pequeños */
+@media (max-height: 400px), (max-width: 360px) {
+    body, html {
+        height: auto;
+        overflow-y: auto;
+    }
+    
+    .container, .screen2, .screen3 {
+        height: auto;
+        min-height: 100%;
+    }
+    
+    .image-container {
+        margin: 20px auto;
+    }
+}
